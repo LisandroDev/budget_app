@@ -42,4 +42,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  const transaction = await Transaction.findByPk(req.params.id);
+  if (transaction) {
+    await transaction.destroy();
+    res.status(204).end();
+  } else {
+    res.status(404).end();
+  }
+});
+
 module.exports = router;
