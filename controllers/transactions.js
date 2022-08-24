@@ -28,4 +28,18 @@ router.get("/balance", async (req, res) => {
   res.json(response);
 });
 
+router.put("/:id", async (req, res) => {
+  const transaction = await Transaction.findByPk(req.params.id);
+
+  if (transaction) {
+    transaction.amount = req.body.amount || transaction.amount;
+    transaction.date = req.body.date || transaction.date;
+    transaction.concept = req.body.concept || transaction.concept;
+    await transaction.save();
+    res.json(transaction);
+  } else {
+    res.status(404).end();
+  }
+});
+
 module.exports = router;
