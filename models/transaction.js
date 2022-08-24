@@ -30,7 +30,7 @@ Transaction.init(
       },
     },
   },
-  { sequelize, underscored: true, timestamps: false, modelName: "transaction" }
+  { sequelize, underscored: true, timestamps: true, modelName: "transaction" }
 );
 
 module.exports = Transaction;
