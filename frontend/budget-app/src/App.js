@@ -1,13 +1,25 @@
-import logo from './logo.svg';
+import transactionService from "./services/transaction";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [balance, setBalance] = useState(0);
+
+  const fetchBalance = async () => {
+    const data = await transactionService.getBalance();
+    setBalance(data.balance);
+  };
+
+  useEffect(() => {
+    fetchBalance();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        {balance}
         <a
           className="App-link"
           href="https://reactjs.org"
