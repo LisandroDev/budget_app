@@ -1,17 +1,16 @@
-import transactionService from "./services/transaction";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react'
+import transactionService from './services/transaction'
+import { useDispatch } from 'react-redux'
 
 function App() {
-  const [balance, setBalance] = useState(0);
 
-  const fetchBalance = async () => {
-    const data = await transactionService.getBalance();
-    setBalance(data.balance);
-  };
-
+const [balance, setBalance] = useState(0)
+  
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    fetchBalance();
-  }, []);
+    transactionService.getBalance().then( balance => setBalance(balance.balance))
+  })
 
   return (
     <div className="App">
