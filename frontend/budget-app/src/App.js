@@ -1,16 +1,6 @@
-import { useEffect, useState } from 'react'
-import transactionService from './services/transaction'
-import { useDispatch } from 'react-redux'
+import Home from './components/Home/Home'
 
 function App() {
-
-const [balance, setBalance] = useState(0)
-  
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    transactionService.getBalance().then( balance => setBalance(balance.balance))
-  })
 
   return (
     <div className="App">
@@ -18,7 +8,7 @@ const [balance, setBalance] = useState(0)
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        {balance}
+        <Home />
         <a
           className="App-link"
           href="https://reactjs.org"

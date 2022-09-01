@@ -7,7 +7,13 @@ const getBalance = async () => {
   return response.data;
 };
 
+const getTransactions = async (limit) => {
+  const response = await axios.get(
+    limit ? `${baseUrl}?limit=${limit}` : `${baseUrl}`
+  );
+  return response.data;
+};
 
+const transactionService = { getBalance, getTransactions };
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { getBalance }
+export default transactionService;
