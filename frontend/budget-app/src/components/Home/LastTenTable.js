@@ -1,4 +1,5 @@
 import Table from "react-bootstrap/Table";
+import Badge from 'react-bootstrap/Badge'
 import transactionService from "../../services/transaction";
 import { useState, useEffect } from "react";
 
@@ -7,7 +8,7 @@ const TableItem = ({ transaction }) => {
   return (
     <tr>
       <td>{concept}</td>
-      <td>{type}</td>
+      <td><Badge bg={type === 'expense' ? 'danger' : 'success'}>{type}</Badge></td>
       <td>{amount}</td>
     </tr>
   );
@@ -23,7 +24,12 @@ function LastTenTable() {
   }, []);
 
   return (
-    <Table striped bordered hover>
+    <Table
+      borderless
+      hover
+      className="rounded"
+      style={{ backgroundColor: "#EAEAEA" }}
+    >
       <thead>
         <tr>
           <th>Concept</th>
