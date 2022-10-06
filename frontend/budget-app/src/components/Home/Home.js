@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Home.styles.css";
 
+
 const Home = () => {
   const [balance, setBalance] = useState(0);
   useEffect(() => {
