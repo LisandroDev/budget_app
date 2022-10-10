@@ -1,5 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import transactionService from "../../services/transaction";
 import { useState } from "react";
 
 const AbmForm = () => {
@@ -14,8 +15,12 @@ const AbmForm = () => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
 
+  const addTransaction = () => {
+    transactionService.addTransaction(formState)
+  }
+
   return (
-    <Form>
+    <Form onSubmit={addTransaction}>
       <Form.Group className="mb-3">
         <Form.Label>Concept</Form.Label>
         <Form.Control

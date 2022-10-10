@@ -14,6 +14,12 @@ const getTransactions = async (limit) => {
   return response.data;
 };
 
-const transactionService = { getBalance, getTransactions };
+const addTransaction = async (formData) => {
+  const transaction = formData
+  const response = await axios.post(baseUrl, transaction)
+  return response
+}
+
+const transactionService = { getBalance, getTransactions, addTransaction };
 
 export default transactionService;
