@@ -39,7 +39,7 @@ function LastTenTable() {
       </thead>
       <tbody>
         {lastTransactions.map((transaction) => (
-          <TableItem transaction={transaction} />
+          <TableItem  key={transaction.id} transaction={transaction} />
         ))}
       </tbody>
     </Table>
