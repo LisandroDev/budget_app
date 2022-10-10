@@ -1,7 +1,12 @@
-const AbmSection = () => {
-    return (
-        <div>Hello!</div>
-    )
-}
+import AbmForm from "./AbmForm";
+import Container from "react-bootstrap/Container";
 
-export default AbmSection
+const AbmSection = () => {
+  return (
+    <Container className="pt-3">
+      <AbmForm />
+    </Container>
+  );
+};
+
+export default AbmSection;
