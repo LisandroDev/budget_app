@@ -29,7 +29,9 @@ const App = () => {
   }, []);
 
   return (
+    
     <Router>
+    
       <Routes>
         <Route path="/" element={<Home transactions={transactions} />} />
         <Route
@@ -43,6 +45,7 @@ const App = () => {
           }
         />
       </Routes>
+      
     </Router>
   );
 };
