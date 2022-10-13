@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import "./Home.styles.css";
 import TransactionsTable from "../TransactionsTable/TransactionsTable";
 
-const Home = () => {
+const Home = ({transactions}) => {
   const [balance, setBalance] = useState(0);
   useEffect(() => {
     transactionService
@@ -30,7 +30,7 @@ const Home = () => {
       <Row className="pt-5">
         {" "}
         <h5>Your last ten transactions are: </h5>
-        <TransactionsTable limit={10} />
+        <TransactionsTable transactions={transactions} limit={10} />
       </Row>
       <Row className="pt-5">
         <Button href="/abm" variant="primary" size="lg">
