@@ -47,6 +47,7 @@ const DeleteButton = ({ id, deleteTransactionFromState }) => {
 
 const TableItem = ({
   transaction,
+  editEnabled,
   updateTransactionState,
   deleteTransactionFromState,
 }) => {
@@ -67,19 +68,23 @@ const TableItem = ({
       </td>
       <td>{amount}</td>
       <td>{date.split("T")[0]}</td>
-      <td>
-        <Stack gap={2} direction="horizontal" className="col-md-8 mx-auto">
-          <Button onClick={() => setEdit(true)} size="md">
-            <MdEdit />
-          </Button>
-          <DeleteButton
-            id={transaction.id}
-            deleteTransactionFromState={deleteTransactionFromState}
-          >
-            {" "}
-          </DeleteButton>
-        </Stack>
-      </td>
+      {editEnabled ? (
+        <td>
+          <Stack gap={2} direction="horizontal" className="col-md-8 mx-auto">
+            <Button onClick={() => setEdit(true)} size="md">
+              <MdEdit />
+            </Button>
+            <DeleteButton
+              id={transaction.id}
+              deleteTransactionFromState={deleteTransactionFromState}
+            >
+              {" "}
+            </DeleteButton>
+          </Stack>
+        </td>
+      ) : (
+        ""
+      )}
     </tr>
   );
 };

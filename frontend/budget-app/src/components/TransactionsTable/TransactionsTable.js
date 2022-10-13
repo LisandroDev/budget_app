@@ -5,7 +5,8 @@ import { useState } from "react";
 import "../../styles/TransactionsTable.css";
 
 const TransactionsTable = ({
-  limit,
+  limitEnabled,
+  editEnabled,
   transactions,
   updateTransactionState,
   deleteTransactionFromState,
@@ -13,11 +14,18 @@ const TransactionsTable = ({
   const [filter, setFilter] = useState("all");
 
   const filterTransactions = () => {
+    let filteredTransactions = transactions;
     if (filter !== "all") {
-      return transactions.filter((transaction) => transaction.type === filter);
-    } else {
-      return transactions;
+      filteredTransactions = transactions.filter(
+        (transaction) => transaction.type === filter
+      );
     }
+    if (limitEnabled && transactions.length > 10) {
+      filteredTransactions = filteredTransactions.slice(
+        transactions.length - 10
+      );
+    }
+    return filteredTransactions;
   };
 
   return (
@@ -42,6 +50,7 @@ const TransactionsTable = ({
         {filterTransactions().map((transaction) => (
           <TableItem
             key={transaction.id}
+            editEnabled={editEnabled}
             transaction={transaction}
             updateTransactionState={updateTransactionState}
             deleteTransactionFromState={deleteTransactionFromState}
