@@ -13,7 +13,7 @@ const AbmSection = ({
       <div className="text-center ">
         <h1>Budget App</h1>
       </div>
-      <AbmForm />
+      <AbmForm  />
       <TransactionsTable
         transactions={transactions}
         updateTransactionState={updateTransactionState}

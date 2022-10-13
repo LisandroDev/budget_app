@@ -22,7 +22,7 @@ const Home = ({transactions}) => {
       <Row className="justify-content-md-center rounded">
         <Col md="auto">
           {" "}
-          <h1>Welcome to Budget App !</h1>
+          <h1>Budget App</h1>
         </Col>
       </Row>
       <Row className="justify-content-md-center pt-5">
