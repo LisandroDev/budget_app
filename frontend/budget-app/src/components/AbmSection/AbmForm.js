@@ -20,7 +20,7 @@ const AbmForm = () => {
   }
 
   return (
-    <Form onSubmit={addTransaction}>
+    <Form className='pt-4' onSubmit={addTransaction}>
       <Form.Group className="mb-3">
         <Form.Label>Concept</Form.Label>
         <Form.Control
