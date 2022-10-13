@@ -1,11 +1,13 @@
 import AbmForm from "./AbmForm";
-import Container from "react-bootstrap/Container";
+import Stack from 'react-bootstrap/Stack'
+import TransactionsTable from "../TransactionsTable";
 
 const AbmSection = () => {
   return (
-    <Container className="pt-3">
+    <Stack gap={5} className='col-md-8 mx-auto' >
       <AbmForm />
-    </Container>
+      <TransactionsTable />
+    </Stack>
   );
 };
 
