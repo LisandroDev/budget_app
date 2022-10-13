@@ -25,6 +25,11 @@ const updateTransaction = async (updatedTransaction, id) => {
   return response
 }
 
-const transactionService = { getBalance, getTransactions, addTransaction, updateTransaction };
+const deleteTransaction = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`)
+  return response
+}
+
+const transactionService = { getBalance, getTransactions, addTransaction, updateTransaction, deleteTransaction };
 
 export default transactionService;
