@@ -1,8 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
-import Stack from 'react-bootstrap/Stack'
+import Stack from "react-bootstrap/Stack";
 import InputGroup from "react-bootstrap/InputGroup";
+import transactionService from "../../services/transaction";
 import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 
@@ -31,11 +32,28 @@ const TableItem = ({ transaction }) => {
 
 const TableItemOnEdit = ({ transaction, setEdit }) => {
   const { concept, type, amount } = transaction;
+  const [modifiedTransaction, setModifiedTransaction] = useState(transaction);
+
+  const handleChange = (event) => {
+    setModifiedTransaction({
+      ...modifiedTransaction,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const onSubmit = () => {
+    transactionService.updateTransaction(modifiedTransaction, transaction.id);
+  };
+
   return (
     <tr>
       <td>
         <InputGroup>
-          <Form.Control placeholder={concept}></Form.Control>
+          <Form.Control
+            onChange={handleChange}
+            name="concept"
+            placeholder={concept}
+          ></Form.Control>
         </InputGroup>
       </td>
       <td>
@@ -43,21 +61,39 @@ const TableItemOnEdit = ({ transaction, setEdit }) => {
       </td>
       <td>
         <InputGroup>
-          <Form.Control placeholder={amount}></Form.Control>
+          <Form.Control
+            onChange={handleChange}
+            name="amount"
+            placeholder={amount}
+          ></Form.Control>
         </InputGroup>
       </td>
       <td>
         <InputGroup>
-          <Form.Control id="date" name="date" type="date"></Form.Control>
+          <Form.Control
+            onChange={handleChange}
+            name="date"
+            id="date"
+            type="date"
+          ></Form.Control>
         </InputGroup>
       </td>
       <td>
-      <Stack gap={2}>
-      <Button size="sm" > Submit</Button>
-        <Button size="sm" onClick={() => setEdit(false)}>
-          Cancel
-        </Button>
-      </Stack>
+        <Stack gap={2}>
+          <Button
+            size="sm"
+            onClick={() => {
+              onSubmit();
+              setEdit(false);
+            }}
+          >
+            {" "}
+            Submit
+          </Button>
+          <Button size="sm" onClick={() => setEdit(false)}>
+            Cancel
+          </Button>
+        </Stack>
       </td>
     </tr>
   );

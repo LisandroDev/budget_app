@@ -20,6 +20,11 @@ const addTransaction = async (formData) => {
   return response
 }
 
-const transactionService = { getBalance, getTransactions, addTransaction };
+const updateTransaction = async (updatedTransaction, id) => {
+  const response = await axios.put(`${baseUrl}/${id}`, updatedTransaction)
+  return response
+}
+
+const transactionService = { getBalance, getTransactions, addTransaction, updateTransaction };
 
 export default transactionService;
