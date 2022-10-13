@@ -6,7 +6,7 @@ const AbmSection = () => {
   return (
     <Stack gap={5} className='col-md-8 mx-auto' >
       <AbmForm />
-      <TransactionsTable editEnabled={true} />
+      <TransactionsTable />
     </Stack>
   );
 };
