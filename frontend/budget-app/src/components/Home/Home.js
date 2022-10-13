@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Home.styles.css";
-import TransactionsTable from "../TransactionsTable";
+import TransactionsTable from "../TransactionsTable/TransactionsTable";
 
 const Home = () => {
   const [balance, setBalance] = useState(0);
