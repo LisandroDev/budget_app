@@ -1,19 +1,16 @@
 import Table from "react-bootstrap/Table";
 import TableItem from "./TableItem";
-import transactionService from "../../services/transaction";
 import TypeDropdownMenu from "./TypeDropdownMenu";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../styles/TransactionsTable.css";
 
-const TransactionsTable = ({ limit }) => {
-  const [transactions, setTransactions] = useState([]);
+const TransactionsTable = ({
+  limit,
+  transactions,
+  updateTransactionState,
+  deleteTransactionFromState,
+}) => {
   const [filter, setFilter] = useState("all");
-
-  useEffect(() => {
-    transactionService
-      .getTransactions(limit ? limit : 0)
-      .then((response) => setTransactions(response));
-  }, [limit]);
 
   const filterTransactions = () => {
     if (filter !== "all") {
@@ -43,7 +40,12 @@ const TransactionsTable = ({ limit }) => {
       </thead>
       <tbody>
         {filterTransactions().map((transaction) => (
-          <TableItem key={transaction.id} transaction={transaction} />
+          <TableItem
+            key={transaction.id}
+            transaction={transaction}
+            updateTransactionState={updateTransactionState}
+            deleteTransactionFromState={deleteTransactionFromState}
+          />
         ))}
       </tbody>
     </Table>
