@@ -11,6 +11,7 @@ const transactionsRouter = require("./controllers/transactions");
 app.use(express.json());
 app.use(cors())
 app.use("/api/transactions", transactionsRouter);
+app.use(express.static('build'))
 
 const startServer = async () => {
   await connectToDatabase();
