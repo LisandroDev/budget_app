@@ -10,6 +10,7 @@ const transactionsRouter = require("./controllers/transactions");
 
 app.use(express.json());
 app.use(cors())
+app.use("/api/transactions", transactionsRouter);
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
   app.use(express.static('build'));
@@ -20,8 +21,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
 }
-
-app.use("/api/transactions", transactionsRouter);
 
 
 
