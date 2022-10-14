@@ -18,9 +18,11 @@ const App = () => {
   };
 
   const deleteTransactionFromState = (id) => {
-    const updatedState = transactions.filter((transaction) => transaction.id !== id)
-    setTransactions(updatedState)
-  }
+    const updatedState = transactions.filter(
+      (transaction) => transaction.id !== id
+    );
+    setTransactions(updatedState);
+  };
 
   useEffect(() => {
     transactionService
@@ -29,9 +31,7 @@ const App = () => {
   }, []);
 
   return (
-    
     <Router>
-    
       <Routes>
         <Route path="/" element={<Home transactions={transactions} />} />
         <Route
@@ -45,7 +45,6 @@ const App = () => {
           }
         />
       </Routes>
-      
     </Router>
   );
 };
