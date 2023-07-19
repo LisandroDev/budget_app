@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Transaction = require("../models/transaction");
+const models = require("../models/transaction");
 const { Op } = require("sequelize");
 
 router.get("/", async (req, res) => {
@@ -8,20 +8,20 @@ router.get("/", async (req, res) => {
     limit = req.query.limit;
   }
 
-  const transactions = await Transaction.findAll({ limit });
+  const transactions = await models.Transaction.findAll({ limit });
   res.json(transactions);
 });
 
 router.post("/", async (req, res) => {
-  const newTransaction = await Transaction.create({ ...req.body });
+  const newTransaction = await models.Transaction.create({ ...req.body });
   res.json(newTransaction);
 });
 
 router.get("/balance", async (req, res) => {
-  const income = await Transaction.sum("amount", {
+  const income = await models.Transaction.sum("amount", {
     where: { type: { [Op.eq]: "income" } },
   });
-  const expense = await Transaction.sum("amount", {
+  const expense = await models.Transaction.sum("amount", {
     where: { type: { [Op.eq]: "expense" } },
   });
   let response = { balance: income - expense };
@@ -29,7 +29,7 @@ router.get("/balance", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const transaction = await Transaction.findByPk(req.params.id);
+  const transaction = await models.Transaction.findByPk(req.params.id);
 
   if (transaction) {
     transaction.amount = req.body.amount || transaction.amount;
@@ -43,7 +43,7 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const transaction = await Transaction.findByPk(req.params.id);
+  const transaction = await models.Transaction.findByPk(req.params.id);
   if (transaction) {
     await transaction.destroy();
     res.status(204).end();

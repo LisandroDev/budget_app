@@ -19,7 +19,7 @@ User.init(
             allowNull: false,
         },
     },
-    { sequelize, underscored: true, timestamps: true, modelName: "user" }
+    { sequelize, underscored: false, timestamps: true, modelName: "user" }
 );
 
 class Transaction extends Model {}

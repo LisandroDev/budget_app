@@ -1,10 +1,24 @@
-import bcrypt from 'bcrypt';
+const model = require('../models/transaction')
+const bcrypt = require('bcrypt')
 
-export class AuthService {
-    private saltRounds = 10;
+ class AuthService {
     
-    public async registerUser(email, password){
+    constructor(){
+        this.saltRounds = 10
+    }
+
+    
+    async registerUser(email, password){
         const hashedPassword = await bcrypt.hash(password, this.saltRounds);
         
+        const newUser = await model.User.create({email: email, hashedPassword: hashedPassword})
+        
+        if(!newUser){
+            throw new Error('Fail at user creation')
+        }
+        
+        return newUser;
     }
 }
+
+module.exports = AuthService

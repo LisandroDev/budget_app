@@ -1,23 +1,26 @@
-import { AuthService } from "../services/auth.service";
-
+const AuthService = require('../services/auth.service')
 class AuthController {
     
-    private authService;
     constructor(){
         this.authService = new AuthService();
     }
-    public register(request, response){
+     async register(request, response){
         const { email, password } = request.body;
+        if(!email || !password){
+            throw new Error('Bad request');
+        }
         
-        return
+        const user = await this.authService.registerUser(email, password);
+        
+        return response.json({user});
     }
-    public login(){
+     login(){
         return
     }
     
-    public logout(){
+    logout(){
         return
     }
 }
 
-export default new AuthController();
+module.exports = new AuthController();
