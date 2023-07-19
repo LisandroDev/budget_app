@@ -8,8 +8,9 @@ import Col from "react-bootstrap/Col";
 import "./Home.styles.css";
 import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import Footer from "../Footer";
+import Logo from "../Logo";
 
-const Home = ({transactions}) => {
+const Home = ({ transactions }) => {
   const [balance, setBalance] = useState(0);
   useEffect(() => {
     transactionService
@@ -21,8 +22,7 @@ const Home = ({transactions}) => {
     <Container className="p-3">
       <Row className="justify-content-md-center rounded">
         <Col md="auto">
-          {" "}
-          <h1>Budget App</h1>
+          <Logo />
         </Col>
       </Row>
       <Row className="justify-content-md-center pt-5">
@@ -31,15 +31,19 @@ const Home = ({transactions}) => {
       <Row className="pt-5">
         {" "}
         <h5>Your last ten transactions are: </h5>
-        <TransactionsTable transactions={transactions} editEnabled={false} limitEnabled={true} />
+        <TransactionsTable
+          transactions={transactions}
+          editEnabled={false}
+          limitEnabled={true}
+        />
       </Row>
       <Row className="pt-5">
         <Button href="/abm" variant="primary" size="lg">
           Add or modify transactions
         </Button>
       </Row>
-      <Row className= "pt-5">
-      <Footer />
+      <Row className="pt-5">
+        <Footer />
       </Row>
     </Container>
   );

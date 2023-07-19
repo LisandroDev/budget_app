@@ -2,6 +2,7 @@ import AbmForm from "./AbmForm";
 import Stack from "react-bootstrap/Stack";
 import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import Footer from "../Footer";
+import Logo from "../Logo";
 
 const AbmSection = ({
   transactions,
@@ -10,10 +11,8 @@ const AbmSection = ({
 }) => {
   return (
     <Stack gap={5} className="col-md-8 mx-auto">
-      <div className="text-center ">
-        <h1>Budget App</h1>
-      </div>
-      <AbmForm  />
+      <Logo />
+      <AbmForm />
       <TransactionsTable
         transactions={transactions}
         updateTransactionState={updateTransactionState}

@@ -1,9 +1,10 @@
-html {
-  font-family: 'Epilogue', sans-serif;
-  font-family: 'Kosugi Maru', sans-serif;
-  font-family: 'Kumbh Sans', sans-serif;
-  font-family: 'Lato', sans-serif;
-  font-family: 'Raleway', sans-serif;
+html, body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #EDF7F6;
+}
+
+body {
+  font-family: 'Roboto', sans-serif !important;
 }
 
 .void {

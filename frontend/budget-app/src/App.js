@@ -1,5 +1,6 @@
 import Home from "./components/Home/Home";
 import AbmSection from "./components/AbmSection/AbmSection";
+import Login from "./components/Login/Login"; 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import transactionService from "./services/transaction";
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />}/>
         <Route path="/" element={<Home transactions={transactions} />} />
         <Route
           path="/abm"
