@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import transactionService from "../../services/transaction";
 import Balance from "./Balance";
 import Container from "react-bootstrap/Container";
@@ -37,11 +38,13 @@ const Home = ({ transactions }) => {
           limitEnabled={true}
         />
       </Row>
-      <Row className="pt-5">
-        <Button href="/abm" variant="primary" size="lg">
-          Add or modify transactions
-        </Button>
-      </Row>
+      <Link to="/abm">
+        <Row className="pt-5">
+          <Button variant="primary" size="lg">
+            Add or modify transactions
+          </Button>
+        </Row>
+      </Link>
       <Row className="pt-5">
         <Footer />
       </Row>
