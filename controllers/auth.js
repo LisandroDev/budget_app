@@ -5,22 +5,42 @@ class AuthController {
         this.authService = new AuthService();
     }
      async register(request, response){
-        const { email, password } = request.body;
-        if(!email || !password){
-            throw new Error('Bad request');
-        }
-        
-        const user = await this.authService.registerUser(email, password);
-        
-        return response.json({user});
+            const { email, password } = request.body;
+            if(!email || !password){
+                throw new Error('Bad request');
+            }
+
+            const user = await this.authService.registerUser(email, password);
+
+            return response.json({user});
+
+
     }
-     login(){
-        return
+    async login(request, response) {
+            const {email, password} = request.body;
+
+            if (!email || !password) {
+                throw new Error('Missing Data');
+            }
+
+            const user = await this.authService.loginUser(email, password);
+
+            return response
+                .status(200)
+                .cookie('jwt_token', user.token, {
+                    httpOnly: true,
+                    domain: process.env.AUTH_DOMAIN,
+                })
+                .json({email: user.email, token: user.token});
     }
-    
-    logout(){
-        return
+
+    async logout(request, response) {
+        return response
+            .status(200)
+            .clearCookie('jwt_token')
+            .json({ message: 'Cookie cleared' });
     }
+
 }
 
 module.exports = new AuthController();

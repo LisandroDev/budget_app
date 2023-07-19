@@ -1,5 +1,6 @@
 const model = require('../models/transaction')
 const bcrypt = require('bcrypt')
+const tokenManager = require('../util/token')
 
  class AuthService {
     
@@ -18,6 +19,26 @@ const bcrypt = require('bcrypt')
         }
         
         return newUser;
+    }
+    
+    async loginUser(email, password){
+        const user = await model.User.findOne({where: {email: email}});
+        
+        if(!user){
+            throw new Error('Unauthorized error')
+        }
+        
+        
+        const passwordCheck = await bcrypt.compare(password, user.hashedPassword)
+        
+        if(!passwordCheck){
+            throw new Error('Invalid credentials')
+        }
+        
+        const token = await tokenManager.generateToken(user.email);
+        
+        return {email: user.email, token: token}
+        
     }
 }
 

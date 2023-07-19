@@ -1,19 +1,29 @@
 const express = require("express");
 const { connectToDatabase } = require("./util/db");
 const { PORT } = require("./util/config");
-const cors = require('cors')
+const cors = require('cors');
+require('express-async-errors')
 const app = express();
 
+
+const authenticateToken = require('./middlewares/authenticate')
 // Routers
 const transactionsRouter = require("./controllers/transactions");
 const authRouter = require('./routes/auth.routes');
 
 app.use(express.json());
-app.use(cors())
-app.use("/api/transactions", transactionsRouter);
+app.use(cors());
 
+
+
+app.use("/api/transactions",authenticateToken, transactionsRouter);
 app.use("/api/auth", authRouter);
+app.use((err, req, res, next) => {
+  console.error(err); // Log the error for debugging purposes
 
+  // Provide a meaningful response to the client
+  res.status(500).json({ error: err });
+});
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
