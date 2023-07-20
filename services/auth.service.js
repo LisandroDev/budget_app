@@ -35,9 +35,9 @@ const tokenManager = require('../util/token')
             throw new Error('Invalid credentials')
         }
         
-        const token = await tokenManager.generateToken(user.email);
+        const token = await tokenManager.generateToken(user.id);
         
-        return {email: user.email, token: token}
+        return {id: user.id, token: token}
         
     }
 }

@@ -1,31 +1,48 @@
 import Footer from "../Footer";
 import Logo from "../Logo";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setAuth }) => {
   const [variant, setVariant] = useState("LOGIN");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     if (variant === "LOGIN") {
       axios
-        .post("/api/auth/login", { email: email, password: password })
+        .post(
+          "/api/auth/login",
+          {
+            email: email,
+            password: password,
+          },
+          { withCredentials: true },
+        )
         .then((res) => {
-          sessionStorage.setItem("jwt_token", res.token);
-          redirect("/");
+          sessionStorage.setItem("jwt_token", res.data.token);
+          setAuth(true);
+          navigate("/");
         })
-        .catch((error) => console.log("error at login"));
+        .catch((error) => toast.error("Invalid Credentials"));
     }
 
     if (variant === "REGISTER") {
-      axios
-        .post("/api/auth/register", { email: email, password: password })
-        .then(() => setVariant("LOGIN"))
-        .catch((error) => console.log("Error at registering"));
+      if (password !== repeatedPassword) {
+        toast.error("Passwords don't match");
+      } else {
+        axios
+          .post("/api/auth/register", {
+            email: email,
+            password: password,
+          })
+          .then(() => setVariant("LOGIN"))
+          .catch((error) => toast.error("Error at register"));
+      }
     }
   };
   const handleChange = (event, action) => {
@@ -70,6 +87,7 @@ const Login = () => {
             <input
               type="password"
               required={true}
+              minLength={6}
               onChange={(event) => handleChange(event, "password")}
               className="form-control"
               id="exampleInputPassword1"
@@ -84,6 +102,7 @@ const Login = () => {
                 <input
                   type="password"
                   required={true}
+                  minLength={6}
                   onChange={(event) => handleChange(event, "repeatedPassword")}
                   className="form-control"
                   id="repeatPassword"
@@ -93,6 +112,7 @@ const Login = () => {
           </div>
           <div className="mb-3 form-check">
             <div
+              className="text-decoration-underline"
               onClick={() =>
                 variant === "REGISTER"
                   ? setVariant("LOGIN")

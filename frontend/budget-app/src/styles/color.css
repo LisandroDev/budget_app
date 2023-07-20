@@ -3,6 +3,22 @@ html, body {
   background-color: #EDF7F6;
 }
 
+a{
+  text-decoration: none !important;
+}
+
+a:visited{
+  text-decoration: none !important;
+}
+
+a:link{
+  text-decoration: none !important;
+}
+
+a:hover{
+  text-decoration: none !important;
+}
+
 body {
   font-family: 'Roboto', sans-serif !important;
 }

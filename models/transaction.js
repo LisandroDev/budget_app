@@ -55,7 +55,7 @@ Transaction.init(
             allowNull: false,
         },
     },
-    { sequelize, underscored: true, timestamps: true, modelName: "transaction" }
+    { sequelize, underscored: false, timestamps: true, modelName: "transaction" }
 );
 
 // Set up the association

@@ -29,7 +29,7 @@ class AuthController {
                 .status(200)
                 .cookie('jwt_token', user.token, {
                     httpOnly: true,
-                    domain: process.env.AUTH_DOMAIN,
+                    domain: 'localhost'
                 })
                 .json({email: user.email, token: user.token});
     }

@@ -1,14 +1,16 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import transactionService from "../../services/transaction";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const AbmForm = () => {
+const AbmForm = ({ addTransactionToState }) => {
   const [formState, setFormState] = useState({
     concept: "",
     amount: 0,
     type: "income",
-    date: new Date()
+    date: new Date(),
   });
 
   const handleChange = (event) => {
@@ -16,11 +18,23 @@ const AbmForm = () => {
   };
 
   const addTransaction = () => {
-    transactionService.addTransaction(formState)
-  }
+    transactionService
+      .addTransaction(formState)
+      .then((newTransaction) => {
+        addTransactionToState(newTransaction.data);
+      })
+      .then(() => toast.success("Transaction added"))
+      .catch(() => toast.error("Fail at add transaction"));
+  };
 
   return (
-    <Form className='pt-4' onSubmit={addTransaction}>
+    <Form
+      className="pt-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        addTransaction();
+      }}
+    >
       <Form.Group className="mb-3">
         <Form.Label>Concept</Form.Label>
         <Form.Control
@@ -66,7 +80,12 @@ const AbmForm = () => {
       </Form.Group>
       <Form.Group>
         <Form.Label>Date</Form.Label>
-        <Form.Control onChange={handleChange} id="date" name="date" type="date"></Form.Control>
+        <Form.Control
+          onChange={handleChange}
+          id="date"
+          name="date"
+          type="date"
+        ></Form.Control>
       </Form.Group>
       <Button variant="primary" type="submit" className="mt-2" size="md">
         Add Transaction

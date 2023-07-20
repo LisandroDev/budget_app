@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken')
 
 class TokenManager {
-    generateToken(userEmail){
-        return jwt.sign({userEmail: userEmail}, process.env.TOKEN_SECRET, {expiresIn: '24h'})
+    generateToken(userId){
+        return jwt.sign({userId: userId}, process.env.TOKEN_SECRET, {expiresIn: '24h'})
     }
     
     authenticateToken(token){

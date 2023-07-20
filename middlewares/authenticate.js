@@ -13,7 +13,7 @@ function authenticateToken(req, res, next){
     const tokenAuthenticated = TokenManager.authenticateToken(cookie);
 
     if(tokenAuthenticated){
-        req.userEmail = tokenAuthenticated.userEmail;
+        req.userId = tokenAuthenticated.userId;
     } else {
         throw new Error('Unauthorized')
     }
